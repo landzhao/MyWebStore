@@ -77,13 +77,14 @@ public class CategoryServiceImpl implements CategoryService {
         //查询总的记录数
         int totalNumber = categoryDao.findTotalNumber();
         PageHelper<Category> pageInfo = new PageHelper<Category>(pageNumber,totalNumber,PAGE_COUNT);
+        pageInfo.setCurrentPageNum(pageNumber);
 
 
         //limit offset
         int limit = PAGE_COUNT;
         int offset=(pageNumber-1)*PAGE_COUNT;
         List<Category> categoryList =categoryDao.findPartCategory(limit,offset);
-        pageInfo.setResultList(categoryList);
+        pageInfo.setRecords(categoryList);
 
 
         return pageInfo;

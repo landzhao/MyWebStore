@@ -5,94 +5,112 @@ import com.cskaoyan.bean.Category;
 import java.util.List;
 
 public class PageHelper<T> {
+    public static final int CATEGORY_PER_PAGE = 3;
+    public static final int ADMIN_PER_PAGE = 2;
+    public static final int PRODUCT_PER_PAGE = 5;
+    public static final int PRODUCT_SEARCH_PER_PAGE = 6;
+    public static final int USER_PER_PAGE = 4;
+    public static final int PRODUCT_PER_PAGE_FRONT_END = 9;
+    public static final int ORDER_PER_PAGE = 4;
 
-    List<T> resultList;
+    // 总记录数据项数
+    private int totalRecordsNum;
+    // 当前页码
+    private int currentPageNum;
+    // 总页数
+    private int totalPageNum;
+    // 上一页
+    private int prevPageNum;
+    // 下一页
+    private int nextPageNum;
 
-    private int currentPageNumber;  //当前的访问的页码
-    private int totalPageNumber; //总页码
-    private int previousPageNumber;
-    private int nextPageNumber;
+    // 记录数据
+    private List<T> records;
 
-    private int totalRecordNumber; //总记录数
-
-    public int getTotalRecordNumber() {
-        return totalRecordNumber;
+    public PageHelper() {
     }
 
-    public void setTotalRecordNumber(int totalRecordNumber) {
-        this.totalRecordNumber = totalRecordNumber;
+    public PageHelper(int pageNumber, int totalNumber, int pageCount) {
+        this.totalRecordsNum = totalNumber;
+
+        // 总页数 totalPageNum
+        int i = totalRecordsNum / pageCount;
+        this.totalPageNum = totalRecordsNum % pageCount == 0 ? i : i + 1;
+
+        //当前页码
+        this.currentPageNum=pageNumber;
+
     }
 
-    public PageHelper(int pageNumber, int totalRecordNumber, int RecordPerPage) {
-          setCurrentPageNumber(pageNumber);
-
-         /* totalPageNumber= totalRecordNumber%RecordPerPage==0?
-                  totalRecordNumber%RecordPerPage:totalRecordNumber%RecordPerPage+1 ;*/
-
-          totalPageNumber=(totalRecordNumber+RecordPerPage-1)/RecordPerPage;
-          setTotalPageNumber(totalPageNumber );
-        
-        if (pageNumber+1>totalPageNumber)
-               setNextPageNumber(pageNumber);
-        else
-              setNextPageNumber(pageNumber+1);
-
-        if (pageNumber-1==0){
-              setPreviousPageNumber(pageNumber);
-        }
-        else
-        {
-              setPreviousPageNumber(pageNumber-1);
-        }  
-    
+    public int getTotalRecordsNum() {
+        return totalRecordsNum;
     }
 
-    public int getPreviousPageNumber() {
-        return previousPageNumber;
+    public void setTotalRecordsNum(int totalRecordsNum, int perPage) {
+        this.totalRecordsNum = totalRecordsNum;
+        // 总页数 totalPageNum
+        int i = totalRecordsNum / perPage;
+        this.totalPageNum = totalRecordsNum % perPage == 0 ? i : i + 1;
     }
 
-    public void setPreviousPageNumber(int previousPageNumber) {
-        this.previousPageNumber = previousPageNumber;
+    public int getCurrentPageNum() {
+        return currentPageNum;
     }
 
-    public int getNextPageNumber() {
-        return nextPageNumber;
+    public void setCurrentPageNum(int currentPageNum) {
+        this.currentPageNum = currentPageNum;
+        // 上一页 prevPageNum
+        this.prevPageNum = currentPageNum - 1 == 0 ? currentPageNum : currentPageNum - 1;
+        // 下一页 nextPageNum
+        this.nextPageNum = currentPageNum + 1 > this.totalPageNum ? currentPageNum : currentPageNum + 1;
     }
 
-    public void setNextPageNumber(int nextPageNumber) {
-        this.nextPageNumber = nextPageNumber;
+    public int getTotalPageNum() {
+        return totalPageNum;
+    }
+
+    public void setTotalPageNum(int totalPageNum) {
+        this.totalPageNum = totalPageNum;
+    }
+
+    public int getPrevPageNum() {
+        return prevPageNum;
+    }
+
+    public void setPrevPageNum(int prevPageNum) {
+        this.prevPageNum = prevPageNum;
+    }
+
+    public int getNextPageNum() {
+        return nextPageNum;
+    }
+
+    public void setNextPageNum(int nextPageNum) {
+        this.nextPageNum = nextPageNum;
+    }
+
+    public List<T> getRecords() {
+        return records;
+    }
+
+    public void setRecords(List<T> records) {
+
+        this.records = records;
+    }
+
+    public void setTotalRecordsNum(int totalRecordsNum) {
+        this.totalRecordsNum = totalRecordsNum;
     }
 
     @Override
     public String toString() {
-        return "PageHelper{" +
-                "resultList=" + resultList +
-                ", currentPageNumber=" + currentPageNumber +
-                ", totalPageNumber=" + totalPageNumber +
+        return "Page{" +
+                "totalRecordsNum=" + totalRecordsNum +
+                ", currentPageNum=" + currentPageNum +
+                ", totalPageNum=" + totalPageNum +
+                ", prevPageNum=" + prevPageNum +
+                ", nextPageNum=" + nextPageNum +
+                ", records=" + records +
                 '}';
     }
-
-    public List<T> getResultList() {
-        return resultList;
-    }
-
-    public void setResultList(List<T> resultList) {
-        this.resultList = resultList;
-    }
-
-    public int getCurrentPageNumber() {
-        return currentPageNumber;
-    }
-
-    public void setCurrentPageNumber(int currentPageNumber) {
-        this.currentPageNumber = currentPageNumber;
-    }
-
-    public int getTotalPageNumber() {
-        return totalPageNumber;
-    }
-
-    public void setTotalPageNumber(int totalPageNumber) {
-        this.totalPageNumber = totalPageNumber;
-    }
-}
+ }

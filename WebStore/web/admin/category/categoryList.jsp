@@ -116,7 +116,7 @@ body {
 						</td>
 					</tr>
 
-				<c:forEach items="${pageInfo.resultList}"  var="category">
+				<c:forEach items="${pageInfo.records}"  var="category">
 
 					<tr>
 						<td width="4%" height="20" bgcolor="#d3eaef" class="STYLE10"><div
@@ -158,7 +158,7 @@ body {
 					<tr>
 						<td width="33%"><div align="left">
 								<span class="STYLE22">&nbsp;&nbsp;&nbsp;&nbsp;共有<strong>
-									${pageInfo.totalRecordNumber }</strong> 条记录，当前第<strong>${pageInfo.currentPageNumber }</strong> 页，共 <strong>${pageInfo.totalPageNumber }</strong> 页</span>
+									${pageInfo.totalRecordsNum }</strong> 条记录，当前第<strong>${pageInfo.currentPageNum }</strong> 页，共 <strong>${pageInfo.totalPageNum }</strong> 页</span>
 						</div>
 						</td>
 						<td width="67%">
@@ -167,34 +167,34 @@ body {
 									<td width="49">
 										<div align="center">
 											<span class="STYLE22">
-											<a href="${pageContext.request.contextPath }/AdminServlet?op=findAllAdmin&num=1">首页</a>
+											<a href="${pageContext.request.contextPath }/CategoryServlet?op=findAllCategory&num=1">首页</a>
 											</span>
 										</div>
 									</td>
 									<td width="49">
 										<div align="center">
 											<span class="STYLE22">
-											<a href="${pageContext.request.contextPath }/AdminServlet?op=findAllAdmin&num=${pageInfo.previousPageNumber}">上一页</a>
+											<a href="${pageContext.request.contextPath }/CategoryServlet?op=findAllCategory&num=${pageInfo.prevPageNum}">上一页</a>
 											</span>
 										</div>
 									</td>
 									<td width="49"><span class="STYLE22">
 									    <div align="center">
 											<span class="STYLE22">
-											<a href="${pageContext.request.contextPath }/AdminServlet?op=findAllAdmin&num=${pageInfo.nextPageNumber}">下一页</a>
+											<a href="${pageContext.request.contextPath }/CategoryServlet?op=findAllCategory&num=${pageInfo.nextPageNum}">下一页</a>
 											</span>
 										</div>
 									</td>
 									<td width="49">
 										<div align="center">
-											<span class="STYLE22"><a href="${pageContext.request.contextPath }/AdminServlet?op=findAllAdmin&num=${pageInfo.totalPageNumber }">尾页</a></span>
+											<span class="STYLE22"><a href="${pageContext.request.contextPath }/AdminServlet?op=findAllAdmin&num=${pageInfo.totalPageNum }">尾页</a></span>
 										</div>
 									</td>
 									<td width="37" class="STYLE22"><div align="center">转到</div>
 									</td>
 									<td width="22">
 										<div align="center">
-											<input type="text" name="num" id="num" value="${pageInfo.currentPageNumber }" style="width:20px; height:12px; font-size:12px; border:solid 1px #7aaebd;" />
+											<input type="text" name="num" id="num" value="${pageInfo.currentPageNum }" style="width:20px; height:12px; font-size:12px; border:solid 1px #7aaebd;" />
 										</div>
 									</td>
 									<td width="22" class="STYLE22"><div align="center">页</div>
@@ -227,7 +227,7 @@ body {
                 return;
             }
 
-            if (num > ${pageInfo.totalPageNumber}) {
+            if (num > ${pageInfo.totalPageNum}) {
                 alert("页码超出范围");
                 return;
             }
