@@ -23,7 +23,7 @@ body {
 
 .STYLE6 {
 	color: #000000;
-	font-size: 12;
+	font-size: 12px;
 }
 
 .STYLE10 {
@@ -50,10 +50,11 @@ body {
 </head>
 
 <body>
-	<form action="${pageContext.request.contextPath }/ProductServlet" method="post">
+	<form action="${pageContext.request.contextPath }/admin/ProductServlet" method="post"
+		  onsubmit="return checkInput()"
+		  onkeypress="if(13 === event.keyCode){jump();return false;}">
 	<input type="hidden" name="op" value="deleteMulti"/>
-	<table width="100%" border="0" align="center" cellpadding="0"
-		cellspacing="0">
+	<table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
 		<tr>
 			<td height="30">
 				<table width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -96,7 +97,7 @@ body {
 					<tr>
 						<td width="4%" height="20" bgcolor="d3eaef" class="STYLE10"><div
 								align="center">
-								<input type="checkbox" name="checkbox" id="checkbox11" />
+								<input type="checkbox" name="checkbox" id="checkbox11" onclick="checkAll()" />
 							</div>
 						</td>
 						<td width="10%" height="20" bgcolor="d3eaef" class="STYLE6"><div
@@ -139,7 +140,7 @@ body {
 						<tr>
 							<td height="20" bgcolor="#FFFFFF">
 								<div align="center">
-									<input type="checkbox" name="pid" id="pid" value="${product.pid }" />
+									<input type="checkbox" name="pid" id="pid" value="${product.pid }" onclick="checking()"/>
 								</div>
 							</td>
 							<td height="20" bgcolor="#FFFFFF" class="STYLE6">
@@ -151,10 +152,10 @@ body {
 								<div align="center">${product.pname}</div>
 							</td>
 							<td height="20" bgcolor="#FFFFFF" class="STYLE19">
-								<div align="center">${product.estoreprice}</div>
+								<div align="center">${product.estorePrice}</div>
 							</td>
 							<td height="20" bgcolor="#FFFFFF" class="STYLE19">
-								<div align="center">${product.markprice}</div>
+								<div align="center">${product.markPrice}</div>
 							</td>
 							<td height="20" bgcolor="#FFFFFF" class="STYLE19">
 								<div align="center">${product.pnum}</div>
@@ -164,8 +165,8 @@ body {
 							</td>
 							<td height="20" bgcolor="#FFFFFF">
 								<div align="center" class="STYLE21">
-									<a href="${pageContext.request.contextPath }/ProductServlet?op=deleteOne&pid=${product.pid}">删除</a> | 
-									<a href="${pageContext.request.contextPath }/CategoryServlet?op=findCategoryByUpdate&pid=${product.pid}">编辑</a>
+									<a href="${pageContext.request.contextPath }/admin/ProductServlet?op=findProductByUpdate&pid=${product.pid}">编辑</a> |
+									<a href="javascript:checkDelete(${product.pid})">删除</a>
 								</div>
 							</td>
 					</tr>
@@ -190,27 +191,27 @@ body {
 									<td width="49">
 										<div align="center">
 											<span class="STYLE22">
-											<a href="${pageContext.request.contextPath }/ProductServlet?op=findAllProduct&num=1">首页</a>
+											<a href="${pageContext.request.contextPath }/admin/ProductServlet?op=findAllProduct&num=1">首页</a>
 											</span>
 										</div>
 									</td>
 									<td width="49">
 										<div align="center">
 											<span class="STYLE22">
-											<a href="${pageContext.request.contextPath }/ProductServlet?op=findAllProduct&num=${page.prevPageNum}">上一页</a>
+											<a href="${pageContext.request.contextPath }/admin/ProductServlet?op=findAllProduct&num=${page.prevPageNum}">上一页</a>
 											</span>
 										</div>
 									</td>
 									<td width="49"><span class="STYLE22">
 									    <div align="center">
 											<span class="STYLE22">
-											<a href="${pageContext.request.contextPath }/ProductServlet?op=findAllProduct&num=${page.nextPageNum}">下一页</a>
+											<a href="${pageContext.request.contextPath }/admin/ProductServlet?op=findAllProduct&num=${page.nextPageNum}">下一页</a>
 											</span>
 										</div>
 									</td>
 									<td width="49">
 										<div align="center">
-											<span class="STYLE22"><a href="${pageContext.request.contextPath }/ProductServlet?op=findAllProduct&num=${page.totalPageNum }">尾页</a></span>
+											<span class="STYLE22"><a href="${pageContext.request.contextPath }/admin/ProductServlet?op=findAllProduct&num=${page.totalPageNum }">尾页</a></span>
 										</div>
 									</td>
 									<td width="37" class="STYLE22"><div align="center">转到</div>
@@ -237,32 +238,62 @@ body {
 	</table>
 	</form>
 	<script type="text/javascript">
-		$().ready(function(){
-			$("#checkbox11").click(function(){
-				if($(this).attr("checked")){
-					$(":checkbox").attr("checked",true);
-				}else{
-					$(":checkbox").attr("checked",false);
-				}
-			})
-		})
+        function checkAll() {
+            var allCheckbox = document.getElementsByName("pid");
+            var checkbox = document.getElementById("checkbox11");
+            for (var i = 0; i < allCheckbox.length; i++) {
+                allCheckbox[i].checked = checkbox.checked;
+            }
+        }
+
+        function checking() {
+            var allCheckbox = document.getElementsByName("pid");
+            var checkbox = document.getElementById("checkbox11");
+            var flag = true;
+            for (var i = 0; i < allCheckbox.length; i++) {
+                flag &= allCheckbox[i].checked;
+            }
+            checkbox.checked = flag;
+        }
+
+        function checkDelete(pid) {
+            if (confirm("是否确认删除？")) {
+                location.href = "${pageContext.request.contextPath }/admin/ProductServlet?op=deleteProduct&pid=" + pid;
+            }
+        }
+
 		function jump() {
-			
 			var num = document.getElementById("num").value;
 			if (!/^[1-9][0-9]*$/.test(num)) {
 				alert("请输入正确的页码");
-				return;
+				return false;
 			}
 	
 			if (num > ${page.totalPageNum}) {
 				alert("页码超出范围");
-				return;
+				return false;
 			}
-	
-			window.location.href = "${pageContext.request.contextPath }/ProductServlet?op=findAllCategory&num="
-					+ num;
-	
+			window.location.href = "${pageContext.request.contextPath }/admin/ProductServlet?op=findAllProduct&num=" + num;
 		}
+
+        function checkInput() {
+            var allCheckbox = document.getElementsByName("pid");
+            for (var i = 0; i < allCheckbox.length; i++) {
+                // 如果有选择返回 true
+                if (allCheckbox[i].checked) {
+                    return confirm("是否确认批量删除？");
+                }
+            }
+            if (allCheckbox.length === 0) {
+                // 此时没有选项
+                alert("Category 为空，还不能删除，快去添加一些");
+                return false;
+            } else {
+                alert("您还没有选择删除项...");
+                return false;
+            }
+            return false;
+        }
 	</script>
 </body>
 </html>

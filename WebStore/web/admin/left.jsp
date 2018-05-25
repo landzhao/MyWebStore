@@ -71,10 +71,9 @@ body {
   <ul id="navigation">
     <li> <a class="head">商品管理</a>
       <ul>
-        <li><a href="${pageContext.request.contextPath}/CategoryServlet?op=findCategory" target="rightFrame">添加商品</a></li>
-        <li><a href="${pageContext.request.contextPath}/ProductServlet?op=findAllProduct&num=1" target="rightFrame">查看/修改商品</a></li>
-        <li><a href="${pageContext.request.contextPath}/admin/product/searchProduct.jsp" target="rightFrame">搜索商品</a></li>
-        <li><a href="${pageContext.request.contextPath}/admin/product/searchProduct.jsp" target="rightFrame">宣传商品</a></li>
+          <li><a href="${pageContext.request.contextPath}/admin/product/addProduct.jsp" target="rightFrame">添加商品</a></li>
+          <li><a href="${pageContext.request.contextPath}/admin/ProductServlet?op=findAllProduct&num=1" target="rightFrame">查看/修改商品</a></li>
+          <li><a href="${pageContext.request.contextPath}/admin/product/searchProduct.jsp" target="rightFrame">搜索商品</a></li>
       </ul>
     </li>
     <li> <a class="head">分类管理</a>
