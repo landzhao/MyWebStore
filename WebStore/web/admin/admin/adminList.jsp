@@ -50,7 +50,7 @@ body {
 </head>
 
 <body>
-	<form action="${pageContext.request.contextPath }/AdminServlet" method="post">
+	<form action="${pageContext.request.contextPath }/admin/AdminServlet" method="post">
 	<!-- <input type="hidden" name="op" value="deleteMulti"/> -->
 	<table width="100%" border="0" align="center" cellpadding="0"
 		cellspacing="0">
@@ -166,27 +166,27 @@ body {
 									<td width="49">
 										<div align="center">
 											<span class="STYLE22">
-											<a href="${pageContext.request.contextPath }/AdminServlet?op=findAllAdmin&num=1">首页</a>
+											<a href="${pageContext.request.contextPath }/admin/AdminServlet?op=findAllAdmin&num=1">首页</a>
 											</span>
 										</div>
 									</td>
 									<td width="49">
 										<div align="center">
 											<span class="STYLE22">
-											<a href="${pageContext.request.contextPath }/AdminServlet?op=findAllAdmin&num=${page.prevPageNum}">上一页</a>
+											<a href="${pageContext.request.contextPath }/admin/AdminServlet?op=findAllAdmin&num=${page.prevPageNum}">上一页</a>
 											</span>
 										</div>
 									</td>
 									<td width="49"><span class="STYLE22">
 									    <div align="center">
 											<span class="STYLE22">
-											<a href="${pageContext.request.contextPath }/AdminServlet?op=findAllAdmin&num=${page.nextPageNum}">下一页</a>
+											<a href="${pageContext.request.contextPath }/admin/AdminServlet?op=findAllAdmin&num=${page.nextPageNum}">下一页</a>
 											</span>
 										</div>
 									</td>
 									<td width="49">
 										<div align="center">
-											<span class="STYLE22"><a href="${pageContext.request.contextPath }/AdminServlet?op=findAllAdmin&num=${page.totalPageNum }">尾页</a></span>
+											<span class="STYLE22"><a href="${pageContext.request.contextPath }/admin/AdminServlet?op=findAllAdmin&num=${page.totalPageNum }">尾页</a></span>
 										</div>
 									</td>
 									<td width="37" class="STYLE22"><div align="center">转到</div>

@@ -91,7 +91,7 @@ body {
     <li> <a class="head">系统用户管理</a>
       <ul>
         <li><a href="${pageContext.request.contextPath }/admin/admin/addAdmin.jsp" target="rightFrame">添加系统用户</a></li>
-        <li><a href="${pageContext.request.contextPath }/AdminServlet?op=findAllAdmin&num=1" target="rightFrame">查看/修改系统用户</a></li>
+        <li><a href="${pageContext.request.contextPath }/admin/AdminServlet?op=findAllAdmin&num=1" target="rightFrame">查看/修改系统用户</a></li>
       </ul>
     </li>
     <li> <a class="head">注册用户管理</a>

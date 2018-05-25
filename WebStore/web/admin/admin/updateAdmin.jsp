@@ -10,7 +10,7 @@
 </head>
 <body>
  
-				<form method="post" action="${pageContext.request.contextPath }/AdminServlet" >
+				<form method="post" action="${pageContext.request.contextPath }/admin/AdminServlet" >
 						<input type="hidden" name="op" value="addAdmin"/>
 			
  	<table width="100%" border="0" align="center" cellpadding="0"
