@@ -9,7 +9,7 @@
 </head>
 <body>
 <div id="top"> </div>
-<form id="login" name="login" action="${pageContext.request.contextPath }/AdminServlet" method="post">
+<form id="login" name="login" action="${pageContext.request.contextPath }/admin/AdminServlet" method="post">
   <input type="hidden" name="op" value="login"/>
   <div id="center">
     <div id="center_left"></div>
