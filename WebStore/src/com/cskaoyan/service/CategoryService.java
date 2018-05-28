@@ -24,4 +24,7 @@ public interface CategoryService {
        Category getCategoryByCid(String cid) throws SQLException, Exception;
 
        PageHelper<Category> findCategoryByPage(String num) throws SQLException;
+
+    boolean isCategoryNameAvailable(String cname) throws SQLException;
+
 }

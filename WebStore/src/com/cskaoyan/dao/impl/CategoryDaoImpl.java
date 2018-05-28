@@ -173,6 +173,12 @@ public class CategoryDaoImpl implements CategoryDao {
     }
 
 
+    @Override
+    public boolean isCategoryNameAvailable(String cname) throws SQLException {
+        QueryRunner queryRunner = new QueryRunner(MyC3PODataSouce.getDataSource());
+        Long query = (Long)queryRunner.query("select count(*) from category where cname = ?", new ScalarHandler(), cname);
+        return 1L != query;
+    }
 
 
 }

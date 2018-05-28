@@ -7,6 +7,9 @@ import java.util.List;
 
 public interface CategoryDao {
 
+    boolean isCategoryNameAvailable(String cname) throws SQLException;
+
+
     public boolean addCategory(String cname) throws SQLException;
 
     List<Category> findAllCategory() throws SQLException;

@@ -90,4 +90,10 @@ public class CategoryServiceImpl implements CategoryService {
         return pageInfo;
     }
 
+
+    @Override
+    public boolean isCategoryNameAvailable(String cname) throws SQLException {
+        return categoryDao.isCategoryNameAvailable(cname);
+    }
+
 }
